@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/action_more"
-        android:icon="@mipmap/action_more"
+        android:icon="@drawable/action_more"
         android:title="@string/action_setting"
         app:showAsAction="ifRoom">
         <menu>

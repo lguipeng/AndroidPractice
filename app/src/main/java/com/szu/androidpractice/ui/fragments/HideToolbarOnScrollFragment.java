@@ -32,7 +32,6 @@ public class HideToolbarOnScrollFragment extends BaseFragment{
     @InjectView(R.id.recyclerView)
     RecyclerView recyclerView;
     private Toolbar mToolbar;
-    private View mDecorView;
     private View rootView;
 
     public static BaseFragment newInstance(Object data) {
@@ -45,7 +44,6 @@ public class HideToolbarOnScrollFragment extends BaseFragment{
         if (activity instanceof BaseActivity){
             mToolbar = ((BaseActivity)activity).getToolbar();
         }
-        mDecorView = activity.getWindow().getDecorView();
     }
 
     @Override
@@ -65,13 +63,11 @@ public class HideToolbarOnScrollFragment extends BaseFragment{
     @Override
     public void onPause() {
         super.onPause();
-        //showToolbarAndSystemUi();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        //showToolbarAndSystemUi();
     }
 
     private void initRecyclerView(){
@@ -105,27 +101,11 @@ public class HideToolbarOnScrollFragment extends BaseFragment{
 
         ViewPropertyAnimator.animate(mToolbar).translationY(-mToolbar.getHeight())
                 .setInterpolator(new AccelerateInterpolator(2))
-                .setListener(new Animator.AnimatorListener() {
+                .setListener(new SimpleAnimatorListener(){
                     @Override
                     public void onAnimationStart(Animator animation) {
+                        super.onAnimationStart(animation);
                         hideSystemUI();
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        //setRecyclerViewPadding(0);
-                        //setToolbarPadding(-mToolbar.getHeight());
-
-                    }
-
-                    @Override
-                    public void onAnimationCancel(Animator animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animator animation) {
-
                     }
                 });
 
@@ -134,30 +114,13 @@ public class HideToolbarOnScrollFragment extends BaseFragment{
     private void showToolbarAndSystemUi() {
         if (mToolbar == null)
             return;
-
         ViewPropertyAnimator.animate(mToolbar).translationY(0)
                 .setInterpolator(new DecelerateInterpolator(2))
-                .setListener(new Animator.AnimatorListener() {
+                .setListener(new SimpleAnimatorListener(){
                     @Override
                     public void onAnimationStart(Animator animation) {
-                        //setRecyclerViewPadding(mToolbar.getHeight());
+                        super.onAnimationStart(animation);
                         showSystemUI();
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-
-                        //setToolbarPadding(0);
-                    }
-
-                    @Override
-                    public void onAnimationCancel(Animator animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animator animation) {
-
                     }
                 });
     }
@@ -187,6 +150,28 @@ public class HideToolbarOnScrollFragment extends BaseFragment{
         int bottom = mToolbar.getPaddingBottom();
         int right = mToolbar.getPaddingRight();
         mToolbar.setPadding(left, top, right, bottom);
+    }
+
+    public static class SimpleAnimatorListener implements Animator.AnimatorListener{
+        @Override
+        public void onAnimationStart(Animator animation) {
+
+        }
+
+        @Override
+        public void onAnimationEnd(Animator animation) {
+
+        }
+
+        @Override
+        public void onAnimationCancel(Animator animation) {
+
+        }
+
+        @Override
+        public void onAnimationRepeat(Animator animation) {
+
+        }
     }
 
 }

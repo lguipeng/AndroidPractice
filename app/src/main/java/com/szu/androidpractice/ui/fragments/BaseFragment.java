@@ -27,9 +27,4 @@ public abstract class BaseFragment extends Fragment{
         if (activity != null)
             activity.showSystemUI();
     }
-
-    public void onSystemBarTintResume(){
-        if (activity != null)
-            activity.onSystemBarTintResume();
-    }
 }

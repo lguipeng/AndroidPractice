@@ -18,9 +18,6 @@ public abstract class RecyclerStateListener extends RecyclerView.OnScrollListene
         super.onScrolled(recyclerView, dx, dy);
 
         int firstVisibleItem = ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
-
-
-
         if (firstVisibleItem == 0) {
             isFirstVisible = true;
             if(!mControlsVisible) {
