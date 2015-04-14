@@ -8,11 +8,11 @@
         app:showAsAction="ifRoom">
         <menu>
             <item
-                android:id="@+id/setting"
-                android:title="@string/action_setting" />
+                android:id="@+id/slide_left"
+                android:title="@string/slide_left" />
             <item
-                android:id="@+id/exit"
-                android:title="@string/exit" />
+                android:id="@+id/slide_right"
+                android:title="@string/slide_right" />
         </menu>
     </item>
 </menu>

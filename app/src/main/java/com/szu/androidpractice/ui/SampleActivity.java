@@ -2,10 +2,15 @@ package com.szu.androidpractice.ui;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 
 import com.szu.androidpractice.R;
 import com.szu.androidpractice.ui.fragments.BaseFragment;
 import com.szu.androidpractice.ui.fragments.HideToolbarOnScrollFragment;
+import com.szu.androidpractice.ui.fragments.SlideMenuFragment;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -21,7 +26,7 @@ public class SampleActivity extends BaseActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        parseBundle(savedInstanceState);
+        parseBundle(getIntent().getExtras());
         setContentView(R.layout.activity_sample);
         ButterKnife.inject(this);
         initToolbar();
@@ -40,7 +45,16 @@ public class SampleActivity extends BaseActivity{
 
     private void initToolbar(){
         toolbar.setTitle(R.string.app_name);
-        toolbar.setTitleTextColor(getColor(android.R.color.white));
+        toolbar.setTitleTextColor(getColor(R.color.action_bar_title_color));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void parseBundle(Bundle bundle){
@@ -49,10 +63,32 @@ public class SampleActivity extends BaseActivity{
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (mFragment != null){
+            if (mFragment.onKeyDown(keyCode, event))
+                return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     private void initFragment(){
         switch (mClickPosition){
             case 0:
-                mFragment = HideToolbarOnScrollFragment.newInstance(null);
+                mFragment = HideToolbarOnScrollFragment.newInstance();
+                break;
+            case 1:
+                mFragment = SlideMenuFragment.newInstance();
                 break;
             default:
                 break;

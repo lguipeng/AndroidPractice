@@ -32,7 +32,6 @@ public abstract class BaseActivity extends ActionBarActivity{
         return getResources().getColor(res);
     }
 
-
     @TargetApi(19)
     private void initWindow(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){

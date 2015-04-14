@@ -40,7 +40,7 @@ public class MainActivity extends BaseActivity implements RecyclerItemClickListe
 
     private void initToolbar(){
         toolbar.setTitle(R.string.app_name);
-        toolbar.setTitleTextColor(getColor(android.R.color.white));
+        toolbar.setTitleTextColor(getColor(R.color.action_bar_title_color));
 
         toolbar.inflateMenu(R.menu.menu_main);
         toolbar.collapseActionView();
@@ -88,6 +88,7 @@ public class MainActivity extends BaseActivity implements RecyclerItemClickListe
     private List<String> createItemList() {
         List<String> itemList = new ArrayList<>();
         itemList.add(getString(R.string.hide_toolbar_onscroll));
+        itemList.add(getString(R.string.slide_menu));
         return itemList;
     }
 }
